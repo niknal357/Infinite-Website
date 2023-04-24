@@ -1,0 +1,2 @@
+openai
+aiohttp==3.8.4

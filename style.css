@@ -1,0 +1,172 @@
+/* Reset some default browser styles */
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+img,
+figure,
+figcaption,
+blockquote,
+form,
+fieldset,
+legend,
+textarea,
+summary,
+details,
+table,
+caption,
+th,
+td,
+tr,
+col,
+colgroup,
+thead,
+tfoot,
+tbody {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set some basic styles for the body */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #f5f5f5;
+    max-width: 800px;
+    /* Set the desired content width */
+    margin: 0 auto;
+    /* Center the content horizontally */
+    padding: 40px;
+    /* Add padding around the content */
+    background-color: #fff;
+    /* Set the background color to white */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Add a subtle box shadow to give a paper-like effect */
+}
+
+/* Apply styles for the headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.75em;
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+h4 {
+    font-size: 1.25em;
+}
+
+h5 {
+    font-size: 1em;
+}
+
+h6 {
+    font-size: 0.875em;
+}
+
+/* Apply styles for paragraphs */
+p {
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+
+/* Apply styles for lists */
+ul,
+ol {
+    list-style-position: inside;
+    margin-bottom: 20px;
+}
+
+ul li,
+ol li {
+    margin-left: 20px;
+}
+
+/* Apply styles for blockquotes */
+blockquote {
+    font-style: italic;
+    margin: 20px 0;
+    padding: 10px 20px;
+    border-left: 5px solid #333;
+}
+
+/* Apply styles for tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid #333;
+}
+
+th {
+    font-weight: bold;
+    background-color: #eee;
+}
+
+/* Apply styles for forms */
+form {
+    margin-bottom: 20px;
+}
+
+input,
+textarea,
+select,
+button {
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+    margin-bottom: 5px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Style for links */
+a {
+    color: #1a73e8;
+    /* Change this to your desired link color */
+    text-decoration: none;
+    /* Remove the underline */
+    transition: color 0.2s ease;
+    /* Add a transition effect for a smoother color change */
+}
+
+/* Change the link color on hover */
+a:hover {
+    color: #0050d8;
+    /* Change this to your desired hover color */
+}
