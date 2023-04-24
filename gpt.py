@@ -1,7 +1,11 @@
 import functools
 import asyncio
 import openai
+from os import listdir
 
+if 'key_openai.txt' not in listdir():
+    print('Please create a file called key_openai.txt with your OpenAI API key in it.')
+    exit()
 with open('key_openai.txt') as f:
     openai.api_key = f.read().strip()
 
