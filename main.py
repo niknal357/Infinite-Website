@@ -45,4 +45,4 @@ app.add_routes([
     web.get('/{tail:.*}', handle)
 ])
 
-web.run_app(app)
+web.run_app(app, host='127.0.0.1', port=8080)
