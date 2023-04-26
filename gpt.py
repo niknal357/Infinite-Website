@@ -30,7 +30,7 @@ async def promptChat(messages: list[dict["role": str, "content": str]], model: s
 
 async def generate_html(path, extra_info):
     print('Generating HTML for', path)
-    html = f"""<html><head><link rel="stylesheet" href="style.css"><title>"""
+    html = f"""<html><head><link rel="stylesheet" href="style.css"><title>Inf - """
     msgs = [
         {"role": "system", "content": "I am a machine designed to build webpages for the `infinite website`. The `infinite website` is a website that has all content because it is generated in real time."},
         {"role": "user", "content": f"Generate a website HTML page with the relative path `{path}`. Link to other pages with relative paths **that start with `/`** and **do not end in .html**. Make sure that the page has many links to other pages and that it contains lots of useful information and that the urls are extremely verbose and descriptive about the content of the page it is linking to. Make sure that there is a link rel to the stylesheet `style.css` and that the page has a title. You are allowed to use scripts, but they must be as a script tag done fully at the end of the html file without external src. **Any words should be inside <a> tags linking to their respective page inline with the text Wikipedia-style.** Example: Quantum mechanics is a fundamental <a href=\"/theory\">theory</a> in <a href=\"/physics\">physics</a> that provides a description of the physical properties of <a href=\"/nature\">nature</a> at the scale of <a href=\"/atoms\">atoms</a> and <a href=\"/subatomic%20particles\">subatomic particles</a>.\n{extra_info}".strip()},
