@@ -18,12 +18,23 @@ async def style(request):
 
 async def handle(request):
     path = '/'+request.match_info.get('tail', '')
+    url_params = request.rel_url.query
+    g = '&'.join([f'{k}={v}' for k, v in url_params.items()])
+    if len(g) > 0:
+        path += '?'+g
+    if path.endswith('.js'):
+        return web.Response(text='', status=404)
     if path.endswith('favicon.ico'):
         return web.Response(text='', status=404)
     if path.endswith('style.css'):
         return await style(request)
     if path not in pages:
-        pages[path] = await generate_html(path, '')
+        extra_info = ''
+        if path == '/':
+            extra_info = 'Please add a link that brings the user to the /search page.'
+        elif path == '/search':
+            extra_info = 'Please add a search field and a search button that will run window.location.href="/"+QUERY when clicked.'
+        pages[path] = await generate_html(path, extra_info)
         with open('pages.json', 'w') as f:
             json.dump(pages, f)
 

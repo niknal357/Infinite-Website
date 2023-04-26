@@ -170,3 +170,63 @@ a:hover {
     color: #0050d8;
     /* Change this to your desired hover color */
 }
+
+/* Apply styles for forms */
+form {
+    margin-bottom: 20px;
+}
+
+input,
+textarea,
+select,
+button {
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    /* Add padding for better appearance */
+    border: 1px solid #ccc;
+    /* Add border with lighter color */
+    border-radius: 4px;
+    /* Add rounded corners */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    /* Add transition for smoother focus effect */
+}
+
+/* Improve focus effect for input, textarea, and select */
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #1a73e8;
+    /* Change border color on focus */
+    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+    /* Add box-shadow for better focus effect */
+    outline: none;
+    /* Remove default outline */
+}
+
+/* Style for buttons */
+button {
+    background-color: #1a73e8;
+    /* Change background color of the button */
+    color: #fff;
+    /* Set the text color to white */
+    cursor: pointer;
+    /* Change the cursor to a pointer when hovering over the button */
+    transition: background-color 0.2s ease;
+    /* Add a transition effect for a smoother background-color change */
+}
+
+/* Change the background color on hover for buttons */
+button:hover {
+    background-color: #0050d8;
+    /* Change the background color on hover */
+}
+
+/* Add disabled state styles for buttons */
+button:disabled {
+    background-color: #ccc;
+    /* Set the background color for disabled buttons */
+    cursor: not-allowed;
+    /* Change the cursor to indicate the button is disabled */
+}
