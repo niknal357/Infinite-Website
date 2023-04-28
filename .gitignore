@@ -153,3 +153,4 @@ cython_debug/
 
 key_openai.txt
 pages.json
+syntax.css
