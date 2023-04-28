@@ -2,6 +2,7 @@ import functools
 import asyncio
 import openai
 from os import listdir
+import markdown
 
 if 'key_openai.txt' not in listdir():
     print('Please create a file called key_openai.txt with your OpenAI API key in it.')
@@ -44,4 +45,40 @@ async def generate_html(path, extra_info):
                              top_p=1, frequency_penalty=0.7, presence_penalty=0.5, stop=['</html>'])
     # print(html)
     html += '</html>'
+    return html
+
+
+async def generate_html_through_markdown(path):
+    print('Generating HTML for', path)
+    msgs = [
+        {"role": "system", "content": "You are a machine designed to build webpages for the `infinite website`. The `infinite website` is a website that has all content because it is generated in real time. Your task it to generate markdown for the `infinite website`. Link other pages with relative paths **that start with `/`** and **do not end in .html**. Make sure that the page has many links to other pages and that it contains lots of useful information and that the urls are extremely verbose and descriptive about the content of the page it is linking to."},
+        {"role": "user", "content": f"Generate a website markdown with the relative path `{path}`."},
+        {
+            "role": "assistant",
+            "content": f"Sure thing. Here is a webpage for the Infinite Website with path `{path}`. I will be sure to add lots of links to other pages and make the page as informative as possible. I will make sure that the links I add are going to be verbose and clearly describe the contents of the page they are linking to, and that all urls are relative (start with a /). I'll make sure all links are clickable.\n\n"
+        }
+    ]
+
+    mk = await promptChat(msgs, max_tokens=1500, temperature=0,
+                          top_p=1, frequency_penalty=0.7, presence_penalty=0.5)
+    # print(mk)
+    msgs[-1]['content'] += mk
+    html_inner = markdown.markdown(
+        mk, extensions=['extra', 'codehilite'])
+    if html_inner.startswith('<h1>'):
+        title = "Inf - "+html_inner[4:html_inner.index('</h1>')]
+    else:
+        msgs.append({
+            "role": "user",
+            "content": "Thanks! Can you give the page a title for the <title> tag?"
+        })
+        msgs.append({
+            "role": "assistant",
+            "content": f"Sure thing. I think it should be called \"Inf -"
+        })
+        title = "Inf - "
+        title += await promptChat(msgs, max_tokens=50, temperature=0,
+                                  top_p=1, frequency_penalty=0.7, presence_penalty=0.5, stop=['"'])
+    html_inner_replaced = html_inner
+    html = f'<!DOCTYPE html><html><head><title>{title}</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/syntax.css"></head><body>{html_inner_replaced}</body></html>'
     return html

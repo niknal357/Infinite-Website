@@ -1,8 +1,11 @@
-from gpt import generate_html
+from gpt import generate_html_through_markdown
 import asyncio
 from aiohttp import web
 from os import listdir
 import json
+import subprocess
+subprocess.run(['pygmentize', '-S', 'default', '-f', 'html',
+               '-a', '.codehilite', '>', 'syntax.css'], shell=True)
 
 if 'pages.json' not in listdir():
     with open('pages.json', 'w') as f:
@@ -14,6 +17,18 @@ with open('pages.json') as f:
 async def style(request):
     with open('style.css', 'r') as f:
         return web.Response(text=f.read(), content_type='text/css')
+
+
+async def syntax(request):
+    with open('syntax.css', 'r') as f:
+        return web.Response(text=f.read(), content_type='text/css')
+
+generating = []
+
+
+async def in_generating(path):
+    while path in generating:
+        await asyncio.sleep(0.1)
 
 
 async def handle(request):
@@ -28,13 +43,15 @@ async def handle(request):
         return web.Response(text='', status=404)
     if path.endswith('style.css'):
         return await style(request)
+    if path.endswith('syntax.css'):
+        return await syntax(request)
     if path not in pages:
-        extra_info = ''
-        if path == '/':
-            extra_info = 'Please add a link that brings the user to the /search page.'
-        elif path == '/search':
-            extra_info = 'Please add a search field and a search button that will run window.location.href="/"+QUERY when clicked.'
-        pages[path] = await generate_html(path, extra_info)
+        if path not in generating:
+            generating.append(path)
+            pages[path] = await generate_html_through_markdown(path)
+            generating.remove(path)
+        else:
+            await in_generating(path)
         with open('pages.json', 'w') as f:
             json.dump(pages, f)
 
