@@ -1,6 +1,5 @@
 from gpt import generate_html
 import asyncio
-import aiohttp_cors
 from aiohttp import web
 from os import listdir
 import json
@@ -45,14 +44,5 @@ app = web.Application()
 app.add_routes([
     web.get('/{tail:.*}', handle)
 ])
-cors = aiohttp_cors.setup(app, defaults={
-    "*": aiohttp_cors.ResourceOptions(
-        allow_credentials=True,
-        expose_headers="*",
-        allow_headers="*"
-    )
-})
-for route in list(app.router.routes()):
-    cors.add(route)
 
 web.run_app(app, host='127.0.0.1', port=8080)
