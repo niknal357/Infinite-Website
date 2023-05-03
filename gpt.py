@@ -24,7 +24,7 @@ async def promptChat(messages: list[dict["role": str, "content": str]], model: s
             break
         except Exception as oops:
             print(oops)
-            asyncio.sleep(2**fail_count)
+            await asyncio.sleep(2**fail_count)
             fail_count += 1
     return response.choices[0].message.content.strip()
 

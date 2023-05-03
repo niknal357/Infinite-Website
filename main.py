@@ -32,7 +32,7 @@ async def in_generating(path):
 
 
 async def handle(request):
-    path = '/'+request.match_info.get('tail', '')
+    path = '/'+(request.match_info.get('tail', '').strip('/'))
     url_params = request.rel_url.query
     g = '&'.join([f'{k}={v}' for k, v in url_params.items()])
     if len(g) > 0:
